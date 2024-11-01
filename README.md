@@ -10,6 +10,7 @@ What will / could be added:
 - program to mimic a word processor app, basic calculation app, presentation app
 - emulator/simulator for games that are free
 - communication via BLE and Wifi
+- FireRabbit nanoBrowser 
 
   # Hardware specs:
   - minimum CPU: 1 x microcontroller ATMega328P or alike (so it will be 1 dedicated CPU + 1 dedicated GPU if you have no dual core system )
