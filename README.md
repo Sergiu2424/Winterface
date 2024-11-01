@@ -1,9 +1,9 @@
-# Winterface
+# Winterface - WIP
 Software - firmware
 Winterface started as an Arduino graphical interface that mimics / hopefully it will result to be kind of RTOS universal GUI.
 What will / could be added:
 
-- self detected video driver or default dummy video driver with minimal resolution
+- self detected video driver or default dummy video driver with minimal resolution *WIP
 - calendar, date, clock kind of widgets
 - specs info regarding storage, folders and files
 - player for basic music and video files
@@ -21,6 +21,6 @@ What will / could be added:
   - BLE module or integrated
   - screen: VGA output or HDMI for external video, internal monochrome 84 x 48 pixels, color TFT ST7735 or ST7789 or eInk- but not only limited to those, for GUI
   - with custom possibility to use 16x2 or 7 segments or RGB leds or neopixels, or any leds or led matrix - in terminal, but no GUI if no graphical display available
-  - 
+  - TBA later
     
     
