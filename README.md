@@ -4,7 +4,7 @@ Winterface started as an Arduino graphical interface that mimics / hopefully it 
 What will / could be added:
 
 - self detected video driver or default dummy video driver with minimal resolution *WIP
-- calendar, date, clock kind of widgets
+- calendar, date, clock, picoPad - and more of this kind of widgets - picoPad WIP https://wokwi.com/projects/413400877201191937
 - specs info regarding storage, folders and files
 - player for basic music and video files
 - program to mimic a word processor app, basic calculation app, presentation app
