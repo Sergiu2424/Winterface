@@ -1,0 +1,81 @@
+//2024 Sergiu - HW Raspberry Pi Pico + ILI9341 2.8" 320 x 240 TFT display
+/*
+Using up and down buttons you cycle through characters and move cursor with left and right buttons 
+ver = 0.5 picoPad
+*/
+#include "SPI.h"
+#include <Adafruit_ILI9341.h>
+#include <Adafruit_GFX.h>
+
+// TFT LCD Display
+#define PIN_TFT_CS 17
+#define PIN_TFT_DC 7
+#define PIN_TFT_RST 6
+
+Adafruit_ILI9341 tft = Adafruit_ILI9341(PIN_TFT_CS, PIN_TFT_DC, PIN_TFT_RST);
+
+
+// Button pins
+const int upButton = 5;
+const int downButton = 9;
+const int leftButton = 4;
+const int rightButton = 8;
+
+char note[251];  // Buffer for 250 characters + null terminator
+int cursorPosition = 0;
+int charIndex = 0;  // Index for current character selection
+const char characters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/"; 
+const int numChars = sizeof(characters) - 1;  // Exclude null terminator
+
+void setup() {
+ tft.begin();
+ tft.fillScreen(ILI9341_BLACK);
+ tft.setCursor(4, 80);
+ tft.println("Winterface starting");
+ tft.drawRect(0, 0, 240, 320, ILI9341_WHITE); // Change to ILI9341 resolution
+ tft.fillTriangle(30, 25, 65, 22, 55, 55, ILI9341_RED);
+ tft.fillTriangle(45, 30, 80, 25, 55, 55, ILI9341_BLUE);
+ tft.fillTriangle(65, 40, 110, 15, 55, 55, ILI9341_GREEN);
+  tft.fillScreen(ILI9341_BLACK);
+  tft.setTextColor(ILI9341_WHITE);
+  tft.setTextSize(1);
+  pinMode(upButton, INPUT_PULLUP);
+  pinMode(downButton, INPUT_PULLUP);
+  pinMode(leftButton, INPUT_PULLUP);
+  pinMode(rightButton, INPUT_PULLUP);
+}
+
+void loop() {
+  if (digitalRead(upButton) == HIGH) {
+    charIndex = (charIndex + 1) % numChars;  // Cycle through characters
+    displayCharacter();
+    //delay(200);  // Debounce delay
+  }
+  
+  if (digitalRead(downButton) == HIGH) {
+    charIndex = (charIndex - 1 + numChars) % numChars;  // Cycle back through characters
+    displayCharacter();
+    //delay(200);  // Debounce delay
+  }
+  
+  if (digitalRead(rightButton) == HIGH) {
+    if (cursorPosition < 250) {
+      note[cursorPosition++] = characters[charIndex];  // Add character
+    }
+    delay(200);  // Debounce delay
+  }
+
+  if (digitalRead(leftButton) == HIGH) {
+    if (cursorPosition > 0) {
+      cursorPosition--;  // Move cursor left
+    }
+    delay(200);  // Debounce delay
+  }
+}
+
+void displayCharacter() {
+  tft.fillRect(0, 0, 128, 16, ILI9341_BLACK);
+  tft.setCursor(10, 0);
+  tft.print("Char: ");
+  tft.print(characters[charIndex]);
+}
